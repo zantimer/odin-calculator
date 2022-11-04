@@ -9,6 +9,7 @@ const btn6 = document.querySelector('.six');
 const btn7 = document.querySelector('.seven');
 const btn8 = document.querySelector('.eight');
 const btn9 = document.querySelector('.nine');
+const btnDot = document.querySelector('.dot');
 
 const btnSum = document.querySelector('.add');
 const btnMinus = document.querySelector('.minus');
@@ -16,6 +17,10 @@ const btnTimes = document.querySelector('.times');
 const btnDiv = document.querySelector('.divide');
 const btnEquals = document.querySelector('.equals');
 const btnClear = document.querySelector('.clear');
+const btnBack = document.querySelector('.backspace');
+
+const operators = document.querySelector('.operators');
+let dotRemoval = undefined;
 
 //display logic
 const displayResult = document.querySelector('.displayText');
@@ -37,6 +42,21 @@ function clearEquation()
     currentEquation.numberB=undefined;
     currentEquation.operator=undefined;
 }
+//backspace
+btnBack.addEventListener('click', deleteLast);
+function deleteLast()
+{
+    let string = displayInput.textContent;
+    displayInput.textContent = string.substring(0, string.length-1);
+}
+//dot
+btnDot.addEventListener('click',()=>{
+    displayInput.textContent += '.';
+    if(displayInput.textContent.includes('.'))
+    {
+        dotRemoval = operators.removeChild(btnDot);
+    }
+})
 
 //sum
 btnSum.addEventListener('click', ()=>{
@@ -61,11 +81,14 @@ btnDiv.addEventListener('click', ()=> {
     displayInput.textContent += ' / ';
     calc('/');
     });
+    
+//clear
 btnClear.addEventListener('click', ()=>{
     displayInput.textContent = '';
     displayResult.textContent ='';
     clearEquation();
     });
+
 //main calculation
 let currentEquation = {numberA: undefined,
                         operator: undefined,
@@ -73,11 +96,15 @@ let currentEquation = {numberA: undefined,
 
 function calc(operator) 
 {
+    if (dotRemoval != undefined)
+    {
+        operators.appendChild(dotRemoval);
+    }
     if(currentEquation.numberA==undefined)
     {
     let temp = displayInput.textContent.split(' ');
     const thisIndex = temp.findIndex((oper) => oper == `${operator}`);
-    currentEquation.numberA = parseInt(temp[thisIndex-1]);
+    currentEquation.numberA = parseFloat(temp[thisIndex-1]);
     currentEquation.operator = operator;
     console.log(currentEquation)
     }
@@ -87,27 +114,36 @@ function calc(operator)
     let temp = displayInput.textContent.split(' ');
     const thisIndex = temp.findIndex((oper) => oper == 
         `${currentEquation.operator}`);
-        currentEquation.numberB = parseInt(temp[thisIndex+1]);
+        currentEquation.numberB = parseFloat(temp[thisIndex+1]);
         
-        displayResult.textContent = (operate(currentEquation.numberA, 
+        displayResult.textContent = operate(currentEquation.numberA, 
             currentEquation.numberB, 
-            currentEquation.operator));
+            currentEquation.operator);
         
         let result = (displayResult.textContent.split('='));
-    displayInput.textContent = parseInt(result[1])+' '+operator+' ';
-    currentEquation.numberA = parseInt(result[1]);
+    displayInput.textContent = parseFloat(result[1])+' '+operator+' ';
+    currentEquation.numberA = parseFloat(result[1]);
     currentEquation.operator = operator;
     }
 }
 btnEquals.addEventListener('click', () =>{
+    if (dotRemoval != undefined)
+    {
+        operators.appendChild(dotRemoval);
+    }
+    
     let temp = displayInput.textContent.split(' ');
     if (temp.length == 3)
     {
     console.log(temp);
-    displayResult.textContent = operate(parseInt(temp[0]), 
-                            parseInt(temp[2]),temp[1]);
+    currentEquation.numberA = parseFloat(temp[0]);
+    currentEquation.operator = temp[1];
+    currentEquation.numberB = parseFloat(temp[2]);
+    displayResult.textContent = operate(currentEquation.numberA,
+                                currentEquation.numberB,
+                                currentEquation.operator);
     displayInput.textContent = '';
-    clearEquation();
+    
     }
     if (currentEquation.numberB==undefined)
     {
@@ -116,6 +152,7 @@ btnEquals.addEventListener('click', () =>{
         displayResult.textContent='';
         alert('nope');
     }
+    clearEquation();
 })
 
 // basic operation logic
