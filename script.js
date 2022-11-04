@@ -277,15 +277,15 @@ function operate(numA, numB, operator)
 {
     if(operator == '+')
     {
-    return numA + `${operator}` + numB +'='+add(numA, numB);
+    return numA + ` ${operator} ` + numB +' = '+add(numA, numB);
     }
     else if(operator=='-')
-    return numA + `${operator}` + 
-            numB +'='+substract(numA, numB);
+    return numA + ` ${operator} ` + 
+            numB +' = '+substract(numA, numB);
     else if(operator=='*')
-    return numA + `${operator}` + 
-            numB +'='+multiply(numA, numB);
+    return numA + ` ${operator} ` + 
+            numB +' = '+multiply(numA, numB);
     else if(operator=='/')
-    return numA + `${operator}` + 
-            numB +'='+divide(numA, numB);
+    return numA + ` ${operator} ` + 
+            numB +' = '+divide(numA, numB);
 }
