@@ -61,7 +61,11 @@ btnDiv.addEventListener('click', ()=> {
     displayInput.textContent += ' / ';
     calc('/');
     });
-btnClear.addEventListener('click', ()=> displayInput.textContent = '');
+btnClear.addEventListener('click', ()=>{
+    displayInput.textContent = '';
+    displayResult.textContent ='';
+    clearEquation();
+    });
 //main calculation
 let currentEquation = {numberA: undefined,
                         operator: undefined,
@@ -69,7 +73,6 @@ let currentEquation = {numberA: undefined,
 
 function calc(operator) 
 {
-    
     if(currentEquation.numberA==undefined)
     {
     let temp = displayInput.textContent.split(' ');
@@ -80,21 +83,40 @@ function calc(operator)
     }
     else if(currentEquation.numberA != undefined)
     {
-    currentEquation.operator = operator;
+        console.log(currentEquation);
     let temp = displayInput.textContent.split(' ');
-    const thisIndex = temp.findIndex((oper) => oper == `${operator}`);
+    const thisIndex = temp.findIndex((oper) => oper == 
+        `${currentEquation.operator}`);
         currentEquation.numberB = parseInt(temp[thisIndex+1]);
-     displayResult.textContent = (operate(currentEquation.numberA, 
+        
+        displayResult.textContent = (operate(currentEquation.numberA, 
             currentEquation.numberB, 
             currentEquation.operator));
-        let result = displayResult.textContent.split('=');
-        displayInput.textContent = result[1]+' '+currentEquation.operator+' ';
-        currentEquation.numberA = parseInt(result[1]);
+        
+        let result = (displayResult.textContent.split('='));
+    displayInput.textContent = parseInt(result[1])+' '+operator+' ';
+    currentEquation.numberA = parseInt(result[1]);
+    currentEquation.operator = operator;
     }
 }
-
-//btnEquals.addEventListener()
-
+btnEquals.addEventListener('click', () =>{
+    let temp = displayInput.textContent.split(' ');
+    if (temp.length == 3)
+    {
+    console.log(temp);
+    displayResult.textContent = operate(parseInt(temp[0]), 
+                            parseInt(temp[2]),temp[1]);
+    displayInput.textContent = '';
+    clearEquation();
+    }
+    if (currentEquation.numberB==undefined)
+    {
+        clearEquation();
+        displayInput.textContent='';
+        displayResult.textContent='';
+        alert('nope');
+    }
+})
 
 // basic operation logic
 function add(a,b)
@@ -120,7 +142,10 @@ function divide(a,b)
     }
     else
     {
-        return 'get outta here';
+        clearEquation();
+        displayInput.textContent='';
+        displayResult.textContent='';
+        alert('Calculated user IQ: NaN');
     }
 };
 
