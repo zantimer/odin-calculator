@@ -35,6 +35,92 @@ btn6.addEventListener('click', () => displayInput.textContent += 6);
 btn7.addEventListener('click', () => displayInput.textContent += 7);
 btn8.addEventListener('click', () => displayInput.textContent += 8);
 btn9.addEventListener('click', () => displayInput.textContent += 9);
+//keyboard support
+
+document.addEventListener('keydown', (e) =>{
+    //numbers
+    console.log(e.key);
+    if (e.key == '1')
+    {
+        displayInput.textContent += 1;
+    }
+    else if (e.key == '2')
+    {
+        displayInput.textContent += 2;
+    }
+    else if (e.key == '3')
+    {
+        displayInput.textContent += 3;
+    }
+    else if (e.key == '4')
+    {
+        displayInput.textContent += 4;
+    }
+    else if (e.key == '5')
+    {
+        displayInput.textContent += 5;
+    }
+    else if (e.key == '6')
+    {
+        displayInput.textContent += 6;
+    }
+    else if (e.key == '7')
+    {
+        displayInput.textContent += 7;
+    }
+    else if (e.key == '8')
+    {
+        displayInput.textContent += 8;
+    }
+    else if (e.key == '9')
+    {
+        displayInput.textContent += 9;
+    }
+    else if (e.key == '0')
+    {
+        displayInput.textContent += 0;
+    }
+    //operators
+    else if (e.key == '+')
+    {
+        displayInput.textContent += ' + ';
+        calc('+');
+    }
+    else if (e.key == '-')
+    {
+        displayInput.textContent += ' - ';
+        calc('-');
+    }
+    else if (e.key == '/')
+    {
+        displayInput.textContent += ' / ';
+        calc('/');
+    }
+    else if (e.key == '*')
+    {
+        displayInput.textContent += ' * ';
+        calc('*');
+    }
+    else if (e.key == '='||e.key=='Enter')
+    {
+        equalCalc();
+    }
+    else if (e.key == 'Backspace'||e.key=='Delete')
+    {
+        deleteLast();
+    }
+    else if (e.key == '.')
+    {
+        if(dotRemoval==undefined)
+        {
+        displayInput.textContent += '.';
+        }
+    if(displayInput.textContent.includes('.')&&dotRemoval==undefined)
+    {
+        dotRemoval = operators.removeChild(btnDot);
+    }
+    }
+})
 //clear
 function clearEquation()
 {
@@ -127,33 +213,34 @@ function calc(operator)
     }
 }
 btnEquals.addEventListener('click', () =>{
-    if (dotRemoval != undefined)
-    {
+    equalCalc();
+})
+
+function equalCalc() {
+    if (dotRemoval != undefined) {
         operators.appendChild(dotRemoval);
     }
-    
+
     let temp = displayInput.textContent.split(' ');
-    if (temp.length == 3)
-    {
-    console.log(temp);
-    currentEquation.numberA = parseFloat(temp[0]);
-    currentEquation.operator = temp[1];
-    currentEquation.numberB = parseFloat(temp[2]);
-    displayResult.textContent = operate(currentEquation.numberA,
-                                currentEquation.numberB,
-                                currentEquation.operator);
-    displayInput.textContent = '';
-    
+    if (temp.length == 3) {
+        console.log(temp);
+        currentEquation.numberA = parseFloat(temp[0]);
+        currentEquation.operator = temp[1];
+        currentEquation.numberB = parseFloat(temp[2]);
+        displayResult.textContent = operate(currentEquation.numberA,
+            currentEquation.numberB,
+            currentEquation.operator);
+        displayInput.textContent = '';
+
     }
-    if (currentEquation.numberB==undefined)
-    {
+    if (currentEquation.numberB == undefined) {
         clearEquation();
-        displayInput.textContent='';
-        displayResult.textContent='';
+        displayInput.textContent = '';
+        displayResult.textContent = '';
         alert('nope');
     }
     clearEquation();
-})
+}
 
 // basic operation logic
 function add(a,b)
