@@ -18,78 +18,82 @@ const btnEquals = document.querySelector('.equals');
 const btnClear = document.querySelector('.clear');
 
 //display logic
-const displayText = document.querySelector('.displayText');
-btn0.addEventListener('click', () => displayText.textContent += 0);
-btn1.addEventListener('click', () => displayText.textContent += 1);
-btn2.addEventListener('click', () => displayText.textContent += 2);
-btn3.addEventListener('click', () => displayText.textContent += 3);
-btn4.addEventListener('click', () => displayText.textContent += 4);
-btn5.addEventListener('click', () => displayText.textContent += 5);
-btn6.addEventListener('click', () => displayText.textContent += 6);
-btn7.addEventListener('click', () => displayText.textContent += 7);
-btn8.addEventListener('click', () => displayText.textContent += 8);
-btn9.addEventListener('click', () => displayText.textContent += 9);
+const displayResult = document.querySelector('.displayText');
+const displayInput = document.querySelector(".currentInput");
+btn0.addEventListener('click', () => displayInput.textContent += 0);
+btn1.addEventListener('click', () => displayInput.textContent += 1);
+btn2.addEventListener('click', () => displayInput.textContent += 2);
+btn3.addEventListener('click', () => displayInput.textContent += 3);
+btn4.addEventListener('click', () => displayInput.textContent += 4);
+btn5.addEventListener('click', () => displayInput.textContent += 5);
+btn6.addEventListener('click', () => displayInput.textContent += 6);
+btn7.addEventListener('click', () => displayInput.textContent += 7);
+btn8.addEventListener('click', () => displayInput.textContent += 8);
+btn9.addEventListener('click', () => displayInput.textContent += 9);
+//clear
+function clearEquation()
+{
+    currentEquation.numberA=undefined;
+    currentEquation.numberB=undefined;
+    currentEquation.operator=undefined;
+}
+
 //sum
-btnSum.addEventListener('click', ()=>displayText.textContent += ' + ');
+btnSum.addEventListener('click', ()=>{
+    displayInput.textContent += ' + ';
+    calc('+');
+});
 
 //minus
-btnMinus.addEventListener('click', ()=>displayText.textContent += ' - ');
+btnMinus.addEventListener('click', ()=> {
+    displayInput.textContent += ' - ';
+    calc('-');
+});
 
 //times
-btnTimes.addEventListener('click', ()=>displayText.textContent += ' * ');
+btnTimes.addEventListener('click', ()=>{
+    displayInput.textContent += ' * ';
+    calc('*');
+    });
 
 //div
-btnDiv.addEventListener('click', ()=>displayText.textContent += ' / ');
-
-btnClear.addEventListener('click', ()=>displayText.textContent = '');
+btnDiv.addEventListener('click', ()=> {
+    displayInput.textContent += ' / ';
+    calc('/');
+    });
+btnClear.addEventListener('click', ()=> displayInput.textContent = '');
 //main calculation
-btnEquals.addEventListener('click', ()=>{
+let currentEquation = {numberA: undefined,
+                        operator: undefined,
+                        numberB: undefined};
+
+function calc(operator) 
+{
     
-    const equation = displayText.textContent.split(' ');
-    console.log(equation);
-    let result = 0;
-    let newEquationLeft;
-    let newEquationRight;
-    if (equation.includes('*'))
+    if(currentEquation.numberA==undefined)
     {
-    for (let i=0;i<equation.length;i++)
+    let temp = displayInput.textContent.split(' ');
+    const thisIndex = temp.findIndex((oper) => oper == `${operator}`);
+    currentEquation.numberA = parseInt(temp[thisIndex-1]);
+    currentEquation.operator = operator;
+    console.log(currentEquation)
+    }
+    else if(currentEquation.numberA != undefined)
     {
-        if(equation[i] == '*')
-        {
-            result += multiply(equation[i-1], equation[i+1])
-            if (equation.length > 3 
-                && equation[i-1] != equation[0] 
-                && equation[i+1] != equation[equation.length-1])
-            {
-                equation[i-1] = result;
-                equation[i+1] = result;
-            }
-            else if(equation.length>3
-                && equation[i-1]==equation[0])
-                {
-                    equation[i+1]=result;
-                }
-            else if(equation.length>3
-                && equation[i-1]!=0
-                && equation[i+1]==equation[equation.length-1])
-                {
-                    equation[i-1] = result;
-                }
-        }
+    currentEquation.operator = operator;
+    let temp = displayInput.textContent.split(' ');
+    const thisIndex = temp.findIndex((oper) => oper == `${operator}`);
+        currentEquation.numberB = parseInt(temp[thisIndex+1]);
+     displayResult.textContent = (operate(currentEquation.numberA, 
+            currentEquation.numberB, 
+            currentEquation.operator));
+        let result = displayResult.textContent.split('=');
+        displayInput.textContent = result[1]+' '+currentEquation.operator+' ';
+        currentEquation.numberA = parseInt(result[1]);
     }
-    }
-    if (equation.includes('/'))
-    {
-    for (let i=0;i<equation.length;i++)
-    {
-        if(equation[i] == '/')
-        {
-            result = divide(equation[i-1], equation[i+1])
-        }
-    }
-    }
-    displayText.textContent = result;
-})
+}
+
+//btnEquals.addEventListener()
 
 
 // basic operation logic
