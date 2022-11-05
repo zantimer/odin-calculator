@@ -10,6 +10,7 @@ const btn7 = document.querySelector('.seven');
 const btn8 = document.querySelector('.eight');
 const btn9 = document.querySelector('.nine');
 const btnDot = document.querySelector('.dot');
+const buttons = document.querySelectorAll('.button');
 
 const btnSum = document.querySelector('.add');
 const btnMinus = document.querySelector('.minus');
@@ -109,6 +110,12 @@ document.addEventListener('keydown', (e) =>{
     {
         deleteLast();
     }
+    else if (e.key == 'Escape')
+    {
+        clearEquation();
+        displayInput.textContent='';
+        displayResult.textContent='';
+    }
     else if (e.key == '.')
     {
         if(dotRemoval==undefined)
@@ -121,6 +128,7 @@ document.addEventListener('keydown', (e) =>{
     }
     }
 })
+
 //clear
 function clearEquation()
 {
@@ -234,7 +242,6 @@ function equalCalc() {
 
     }
     if (currentEquation.numberB == undefined) {
-        clearEquation();
         displayInput.textContent = '';
         displayResult.textContent = '';
         alert('nope');
@@ -277,7 +284,8 @@ function operate(numA, numB, operator)
 {
     if(operator == '+')
     {
-    return numA + ` ${operator} ` + numB +' = '+add(numA, numB);
+    return numA + ` ${operator} ` 
+            + numB +' = '+add(numA, numB);
     }
     else if(operator=='-')
     return numA + ` ${operator} ` + 

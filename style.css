@@ -9,16 +9,26 @@ body {
 .main {
     display:flex;
     flex-flow: column nowrap;
-    background-color: red;
+    background-color:darkcyan;
+    border-radius: 15%;
     width:30vw;
-    height: 50vh;
+    height: 70vh;
     justify-content: center;
     align-items: center;
 }
+.calcName {
+    color: gold;
+    font-size: 25px;
+    font-weight: 900;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
 .display {
     display:flex;
-    background-color: azure;
+    background-color: darkcyan;
     flex-flow: column nowrap;
+    justify-content: flex-start;
+    margin-bottom: auto;
+    margin-top: 0px;
     width: 25vw;
     height: 22.5vh;
     
@@ -35,9 +45,10 @@ body {
     overflow-wrap:break-word;
     word-wrap: break-word;
     word-break: break-all;
+    text-align: right;
     align-items: flex-end;
     justify-content: flex-end;
-    text-align: right;
+    background-color: rgb(200, 255, 255);
     font-size: 30px;
 }
 .displayText{
@@ -55,6 +66,59 @@ body {
     word-wrap: break-word;
     word-break: break-all;
     text-align: right;
+    background-color: rgb(200, 255, 255);
     font-size: 20px;
+}
+.buttons {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    flex: auto;
+    justify-content: center;
+    align-items: center;
     
 }
+.operators {
+    margin-bottom: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items:center;
+    flex: 1 1 20px;
+    max-height: 50px;
+    width: 300px;
+}
+.numbers {
+    display: flex;
+    flex: auto;
+    flex-flow: column wrap;
+    margin-top: 40px;
+    height: 150px;
+    width: 300px;
+}
+.button {
+    font-size: 28px;
+    margin: 2px;
+    border-radius: 50%;
+}
+.op {
+    background-color: darkgray;
+}
+.num {
+    background-color:rosybrown;
+}
+.equals {
+    height: 84px;
+}
+.button:hover {
+    transition: ease-in;
+    transition-duration: 0.25s;
+    background-color: chartreuse;
+}
+.active {
+    transition: ease-in;
+    transition-duration: 0.25s;
+    background-color: chartreuse;
+}
+
+
