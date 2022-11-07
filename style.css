@@ -2,17 +2,17 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 20vh;
+    margin-top: 15vh;
     margin-bottom: auto;
     background-color: dimgray;
 }
 .main {
     display:flex;
     flex-flow: column nowrap;
-    background-color:darkcyan;
+    background-color:indianred;
     border-radius: 15%;
     width:30vw;
-    height: 70vh;
+    height: 80vh;
     justify-content: center;
     align-items: center;
 }
@@ -31,7 +31,6 @@ body {
     margin-top: 0px;
     width: 25vw;
     height: 22.5vh;
-    
 }
 .currentInput{
     margin:0;
@@ -41,7 +40,7 @@ body {
     border: 2px solid black;
     border-top: 0px;
     width: 24.8vw;
-    height: 12.5vh;
+    height: 15vh;
     overflow-wrap:break-word;
     word-wrap: break-word;
     word-break: break-all;
@@ -49,7 +48,7 @@ body {
     align-items: flex-end;
     justify-content: flex-end;
     background-color: rgb(200, 255, 255);
-    font-size: 30px;
+    font-size: 2.5em;
 }
 .displayText{
     margin:0;
@@ -99,16 +98,19 @@ body {
 .button {
     font-size: 28px;
     margin: 2px;
-    border-radius: 50%;
+    border: 1px solid black;
+    border-radius: 25%;
 }
 .op {
     background-color: darkgray;
 }
 .num {
-    background-color:rosybrown;
+    background-color:gainsboro;
 }
 .equals {
-    height: 84px;
+    height: 195px;
+    border-radius: 5%;
+    font-size: 3em;
 }
 .button:hover {
     transition: ease-in;
