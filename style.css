@@ -2,17 +2,17 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 15vh;
+    margin-top: 5vh;
     margin-bottom: auto;
     background-color: dimgray;
 }
 .main {
     display:flex;
     flex-flow: column nowrap;
-    background-color:indianred;
+    background-color:rgb(90, 165, 190);
     border-radius: 15%;
-    width:30vw;
-    height: 80vh;
+    width:40vw;
+    height: 90vh;
     justify-content: center;
     align-items: center;
 }
@@ -29,8 +29,8 @@ body {
     justify-content: flex-start;
     margin-bottom: auto;
     margin-top: 0px;
-    width: 25vw;
-    height: 22.5vh;
+    width: 90%;
+    height: 28%;
 }
 .currentInput{
     margin:0;
@@ -39,7 +39,7 @@ body {
     flex-grow: 2;
     border: 2px solid black;
     border-top: 0px;
-    width: 24.8vw;
+    width: 100%;
     height: 15vh;
     overflow-wrap:break-word;
     word-wrap: break-word;
@@ -56,7 +56,7 @@ body {
     flex: auto;
     border: 2px solid black;
     border-bottom: 0px;
-    width: 24.8vw;
+    width: 100%;
     height: 12.5vh;
     flex-flow: row wrap;
     align-items: flex-end;
@@ -66,7 +66,7 @@ body {
     word-break: break-all;
     text-align: right;
     background-color: rgb(200, 255, 255);
-    font-size: 20px;
+    font-size: 1.5em;
 }
 .buttons {
     display: flex;
@@ -75,7 +75,7 @@ body {
     flex: auto;
     justify-content: center;
     align-items: center;
-    
+    width: 100%;
 }
 .operators {
     margin-bottom: auto;
@@ -85,27 +85,28 @@ body {
     align-items:center;
     flex: 1 1 20px;
     max-height: 50px;
-    width: 300px;
+    width: 90%;
 }
 .numbers {
     display: flex;
     flex: auto;
     flex-flow: column wrap;
-    margin-top: 40px;
+    margin-top: 20px;
+    margin-bottom: 10px;
     height: 150px;
-    width: 300px;
+    width: 90%;
 }
 .button {
-    font-size: 28px;
+    font-size: 2rem;
     margin: 2px;
     border: 1px solid black;
     border-radius: 25%;
 }
-.op {
-    background-color: darkgray;
+.operators>button {
+    background-color: rgb(147, 150, 111);
 }
-.num {
-    background-color:gainsboro;
+.numbers>button {
+    background-color:rgb(125, 161, 130);
 }
 .equals {
     height: 195px;
